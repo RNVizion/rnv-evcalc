@@ -1,0 +1,22 @@
+{
+  "_note": "No number enters this file without a verified_on date. Nulls refuse.",
+  "thresholds": { "rel_uplift": 0.15, "abs_floor": 25 },
+  "staleness_days": 30,
+  "relist_buffer_days": 7,
+  "marketplaces": {
+    "ebay": { "pct": 0.1325, "flat": 0.40, "verified_on": "2026-07-07" }
+  },
+  "grading_services": {
+    "PSA": {
+      "tiers": {
+        "regular": {
+          "fee": 79.99,
+          "max_declared_value": 1500,
+          "roundtrip_ship_insured": null,
+          "turnaround_days": 70,
+          "verified_on": "2026-07-07"
+        }
+      }
+    }
+  }
+}
