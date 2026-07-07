@@ -1,0 +1,22 @@
+{
+  "_note": "No number enters this file without a verified_on date. Nulls refuse.",
+  "thresholds": { "rel_uplift": 0.15, "abs_floor": 25 },
+  "staleness_days": 30,
+  "relist_buffer_days": 7,
+  "marketplaces": {
+    "ebay": { "pct": null, "flat": null, "verified_on": null }
+  },
+  "grading_services": {
+    "PSA": {
+      "tiers": {
+        "value": {
+          "fee": null,
+          "max_declared_value": null,
+          "roundtrip_ship_insured": null,
+          "turnaround_days": null,
+          "verified_on": null
+        }
+      }
+    }
+  }
+}

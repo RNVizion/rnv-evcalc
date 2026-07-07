@@ -1,0 +1,20 @@
+{
+  "name": "EXAMPLE — copy me, fill with real comps",
+  "set": "Example Set",
+  "number": "EX-001",
+  "condition_notes": "pack fresh, centering slightly right",
+  "raw_price":     { "value": 120, "source_url": "https://ebay/sold/...", "as_of": "2026-07-05" },
+  "graded_prices": {
+    "10": { "value": 420, "source_url": "https://ebay/sold/...", "as_of": "2026-07-05" },
+    "9":  { "value": 175, "source_url": "https://ebay/sold/...", "as_of": "2026-07-05" },
+    "8":  { "value": 110, "source_url": "https://ebay/sold/...", "as_of": "2026-07-04" }
+  },
+  "bulk_le7_value": { "value": 80, "as_of": "2026-07-04" },
+  "grade_probs": { "10": 0.25, "9": 0.55, "8": 0.15, "le7": 0.05 },
+  "ship_raw_seller": 5,
+  "ship_graded_seller": 8,
+  "sale_window": "2026-12-20",
+  "marketplace_raw": "ebay",
+  "marketplace_graded": "ebay",
+  "grading": { "service": "PSA", "tier": "value" }
+}
