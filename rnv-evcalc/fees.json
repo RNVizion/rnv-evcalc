@@ -4,17 +4,17 @@
   "staleness_days": 30,
   "relist_buffer_days": 7,
   "marketplaces": {
-    "ebay": { "pct": null, "flat": null, "verified_on": null }
+    "ebay": { "pct": 0.1325, "flat": 0.40, "verified_on": "2026-07-07" }
   },
   "grading_services": {
     "PSA": {
       "tiers": {
-        "value": {
-          "fee": null,
-          "max_declared_value": null,
+        "regular": {
+          "fee": 79.99,
+          "max_declared_value": 1500,
           "roundtrip_ship_insured": null,
-          "turnaround_days": null,
-          "verified_on": null
+          "turnaround_days": 70,
+          "verified_on": "2026-07-07"
         }
       }
     }
