@@ -17,6 +17,17 @@
           "verified_on": "2026-07-07"
         }
       }
+    },
+    "BGS": {
+      "tiers": {
+        "base_subgrades": {
+          "fee": 17.95,
+          "max_declared_value": 999999,
+          "roundtrip_ship_insured": null,
+          "turnaround_days": 105,
+          "verified_on": "2026-07-07"
+        }
+      }
     }
   }
 }
