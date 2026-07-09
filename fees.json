@@ -1,33 +1,141 @@
 {
-  "_note": "No number enters this file without a verified_on date. Nulls refuse.",
-  "thresholds": { "rel_uplift": 0.15, "abs_floor": 25 },
+  "_schema": "2.0",
+  "_changed": "2026-07-09: roundtrip_ship_insured (scalar, per-card) replaced by shipping.bands (per-order, keyed by declared value and card count). The old field lied: PSA and BGS both bill shipping per shipment, not per card, and both scale with declared value.",
+  "_rule": "No number enters this file without a verified_on date. Anything unverified stays null and triggers REFUSED.",
+
+  "grading_services": {
+    "psa": {
+      "tier_name": "Regular",
+      "fee_per_card": 79.99,
+      "fee_verified_on": "2026-07-09",
+      "max_declared_value": null,
+      "_max_declared_value_note": "[verify] Regular tier's declared-value ceiling not captured; the wizard accepted $250 without complaint.",
+
+      "turnaround": {
+        "value": null,
+        "unit": "calendar_days",
+        "verified_on": null,
+        "_note": "[verify] Sources conflict: PSA Regular reported anywhere from 40-60 to ~70 calendar days in 2026. Do not assert. Pull the live estimate from the submission wizard at submit time."
+      },
+
+      "subgrades": false,
+
+      "shipping": {
+        "model": "per_order",
+        "inbound_paid_to_service": true,
+        "_inbound_note": "PSA sells the inbound FedEx label; the charge posts after package drop-off, not at checkout. Shipping outbound yourself (USPS or FedEx only, never UPS/DHL) may beat this and is an open optimization.",
+        "bands": [
+          {
+            "n_cards_max": 1,
+            "declared_value_total_max": 250,
+            "inbound_label": 19.99,
+            "inbound_insurance": 2.50,
+            "insured_return": 19.99,
+            "order_total": 42.48,
+            "verified_on": "2026-07-09",
+            "source": "PSA Online Submission Center, Submission Summary screen, Regular tier, 1 item, $250 declared value"
+          }
+        ]
+      },
+
+      "_all_in_single_card_at_250": 122.47,
+      "_all_in_verified_on": "2026-07-09"
+    },
+
+    "bgs": {
+      "tier_name": "Standard (with subgrades)",
+      "fee_per_card": 34.95,
+      "fee_verified_on": "2026-07-09",
+      "max_declared_value": null,
+      "_max_declared_value_note": "[verify] Beckett publishes no declared-value caps on these service levels.",
+
+      "turnaround": {
+        "value": 45,
+        "unit": "business_days",
+        "verified_on": "2026-07-09",
+        "excludes_transit": true,
+        "_note": "Business days while the card is in Beckett's possession. Transit both ways is on top. 45 business days is roughly 9 calendar weeks."
+      },
+
+      "subgrades": true,
+
+      "shipping": {
+        "model": "per_order",
+        "inbound_paid_to_service": false,
+        "_inbound_note": "[confirm/fill] Beckett does not sell an inbound label in this flow; you ship to Dallas yourself. Outbound insured cost is NOT yet captured and must be added before any BGS-vs-PSA comparison is honest.",
+        "bands": [
+          {
+            "n_cards_max": 1,
+            "declared_value_total_max": 250,
+            "inbound_label": null,
+            "inbound_insurance": null,
+            "insured_return": 28.00,
+            "insurance": 4.50,
+            "order_total_excl_outbound": 32.50,
+            "verified_on": "2026-07-09",
+            "source": "Beckett submission wizard, Order Summary, Standard With Subgrades, 1 card",
+            "_note": "Insurance and return shipping were identical at the Base tier, so these bands key off declared value, not service level. Declared value assumed $250 to match the PSA quote — [verify] that the Beckett flow took the same figure."
+          }
+        ]
+      },
+
+      "_all_in_single_card_at_250_excl_outbound": 67.45,
+      "_all_in_verified_on": "2026-07-09"
+    },
+
+    "bgs_base": {
+      "tier_name": "Base (with subgrades)",
+      "fee_per_card": 17.95,
+      "fee_verified_on": "2026-07-09",
+      "_fee_without_subgrades": 14.95,
+      "_subgrade_upcharge_note": "$3 upcharge for any 10s where subgrades are added.",
+
+      "turnaround": {
+        "value": 75,
+        "unit": "business_days",
+        "verified_on": "2026-07-09",
+        "excludes_transit": true,
+        "open_ended": true,
+        "_note": "Listed as '75+'. The plus is load-bearing: treat as a floor, not an estimate. ~15 calendar weeks minimum, plus transit."
+      },
+
+      "subgrades": true,
+
+      "shipping": {
+        "model": "per_order",
+        "inbound_paid_to_service": false,
+        "bands": [
+          {
+            "n_cards_max": 1,
+            "declared_value_total_max": 250,
+            "insured_return": 28.00,
+            "insurance": 4.50,
+            "order_total_excl_outbound": 32.50,
+            "verified_on": "2026-07-09",
+            "source": "Beckett submission wizard, Order Summary, Base With Subgrades, 1 card"
+          }
+        ]
+      },
+
+      "_all_in_single_card_at_250_excl_outbound": 50.45,
+      "_all_in_verified_on": "2026-07-09"
+    }
+  },
+
+  "graded_price_multiplier_note": "Grading fee is not the deciding cost. The same physical card nets differently by slab: PSA commands the premium in vintage and Pokemon; BGS grades harder, so a BGS 9.5 often reflects what PSA would call a 10. Model this as DIFFERENT graded-price nodes per service in the per-card file, never as one price with a swapped fee. [verify] per card, per service, with dated sold comps.",
+
+  "marketplace_fees": {
+    "_note": "[verify] Not yet captured. Enter current, dated values before any verdict is trusted.",
+    "ebay_raw": { "pct": null, "flat": null, "verified_on": null },
+    "ebay_graded": { "pct": null, "flat": null, "verified_on": null }
+  },
+
+  "thresholds": {
+    "rel_uplift": 0.15,
+    "abs_floor": 25
+  },
+
   "staleness_days": 30,
   "relist_buffer_days": 7,
-  "marketplaces": {
-    "ebay": { "pct": 0.1325, "flat": 0.40, "verified_on": "2026-07-07" }
-  },
-  "grading_services": {
-    "PSA": {
-      "tiers": {
-        "regular": {
-          "fee": 79.99,
-          "max_declared_value": 1500,
-          "roundtrip_ship_insured": null,
-          "turnaround_days": 70,
-          "verified_on": "2026-07-07"
-        }
-      }
-    },
-    "BGS": {
-      "tiers": {
-        "base_subgrades": {
-          "fee": 17.95,
-          "max_declared_value": 999999,
-          "roundtrip_ship_insured": null,
-          "turnaround_days": 105,
-          "verified_on": "2026-07-07"
-        }
-      }
-    }
-  }
+  "discount_rate": 0
 }
