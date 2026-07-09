@@ -193,33 +193,89 @@ def load_chases(path):
     return json.loads(Path(path).read_text())
 
 
-def flag_card(chases, name, set_code, rarity, extra_text=""):
-    """Two independent sources. Either fires. Reasons never merged."""
+def flag_card(chases, name, set_code, rarity, number=None, card_set=None, extra_text=""):
+    """Three independent sources. Any fires. Reasons never merged.
+
+    1. watchlist row  (set code, or set+collector number, or name+rarity)
+    2. set rule       (collector number above the base-set size = secret rare)
+    3. structural     (rarity keywords, serial numbering, autos)
+    """
     reasons = []
     blob = " ".join(filter(None, [name or "", rarity or "", extra_text or ""])).lower()
+    def norm(x):
+        return re.sub(r"[^a-z0-9]", "", (x or "").lower())
+
+    set_n = norm(card_set)
+
+    def set_matches(row_set, aliases=()):
+        if not row_set or not set_n:
+            return False
+        cands = [norm(row_set)] + [norm(a) for a in aliases]
+        return any(c and (c in set_n or set_n in c) for c in cands)
+
+    # Aliases live on the set rules; the watchlist rows share them.
+    alias_map = {norm(r["set"]): r.get("aliases", []) for r in chases.get("set_rules", [])}
 
     for row in chases["chases"]:
         if set_code and set_code.upper() in [s.upper() for s in row.get("set_codes", [])]:
-            reasons.append({"source": "watchlist", "match": "set_code",
-                            "row": row["name"], "grade_watch": row.get("grade_watch"),
+            reasons.append({"source": "watchlist", "match": "set_code", "row": row["name"],
+                            "grade_watch": row.get("grade_watch"),
                             "verified_on": row["market_snapshot"].get("verified_on")})
             continue
-        if name and row["name"].lower() in (name or "").lower():
+        nums = row.get("card_numbers", [])
+        if number and nums and set_matches(row.get("set"), alias_map.get(norm(row.get("set")), [])) and \
+                re.sub(r"[^0-9]","",str(number)).lstrip("0") in [n.lstrip("0") for n in nums]:
+            reasons.append({"source": "watchlist", "match": f"#{number} in {row.get('set')}",
+                            "row": f"{row['name']} ({row['rarity_any_of'][0]})" if row.get("rarity_any_of") else row["name"],
+                            "grade_watch": row.get("grade_watch"),
+                            "verified_on": row["market_snapshot"].get("verified_on")})
+            continue
+        if name and row["name"].lower() in (name or "").lower() and not nums:
             rar = [r.lower() for r in row.get("rarity_any_of", [])]
             if not rar or any(r in blob for r in rar):
-                reasons.append({"source": "watchlist", "match": "name+rarity",
-                                "row": row["name"], "grade_watch": row.get("grade_watch"),
+                reasons.append({"source": "watchlist", "match": "name+rarity", "row": row["name"],
+                                "grade_watch": row.get("grade_watch"),
                                 "verified_on": row["market_snapshot"].get("verified_on")})
+
+    # Source 2: the set rule. Catches every secret rare, named or not.
+    # An asterisk in a Riftbound number marks an artist-signed overnumber.
+    if number:
+        if "*" in str(number):
+            reasons.append({"source": "structural",
+                            "match": "asterisk in card number: artist-signed overnumber"})
+        try:
+            n = int(re.sub(r"[^0-9]", "", str(number)) or 0)
+        except ValueError:
+            n = None
+        for rule in chases.get("set_rules", []):
+            if n and set_matches(rule["set"], rule.get("aliases", [])) and n >= rule["secret_from"]:
+                reasons.append({"source": "set_rule",
+                                "match": f"#{n} >= {rule['secret_from']} in {rule['set']}: "
+                                         f"secret rare ({rule['base_set_size']} base cards)"})
 
     sm = chases["structural_markers"]
     hits = [k for k in sm["rarity_keywords"] if k in blob]
     hits += [k for k in sm["other_markers"] if k in blob]
+    if any(sym in ((rarity or "") + (name or "")) for sym in sm.get("diamond_symbols", [])):
+        hits.append("diamond parallel symbol")
     if re.search(sm["one_of_one_regex"], blob):
         hits.append("1/1")
     elif re.search(sm["serial_number_regex"], blob):
         hits.append("serial numbered")
     if hits:
         reasons.append({"source": "structural", "match": ", ".join(sorted(set(hits)))})
+
+    # Set-scoped rarity codes, matched against the RARITY field only, on word
+    # boundaries: "AR" as a substring lives inside "Naruto" and would flag the set.
+    rar_only = (rarity or "").lower()
+    for rule in chases.get("set_rules", []):
+        codes = rule.get("chase_rarity_codes") or []
+        if not codes or not set_matches(rule["set"], rule.get("aliases", [])):
+            continue
+        found = [c_ for c_ in codes if re.search(rf"\b{re.escape(c_)}\b", rar_only)]
+        if found:
+            reasons.append({"source": "set_rule",
+                            "match": f"chase rarity code {'/'.join(found).upper()} in {rule['set']}"})
 
     return ("LOOK" if reasons else "PASS"), reasons
 
@@ -264,6 +320,8 @@ def main():
     ap.add_argument("photo")
     ap.add_argument("--name", default=None)
     ap.add_argument("--set-code", default=None)
+    ap.add_argument("--number", default=None, help="collector number, e.g. 121")
+    ap.add_argument("--set", dest="card_set", default=None, help="e.g. 'Perfect Order'")
     ap.add_argument("--rarity", default="")
     ap.add_argument("--game", default="")
     ap.add_argument("--chases", default="chases.json")
@@ -304,14 +362,17 @@ def main():
         return
 
     chases = load_chases(args.chases)
-    flag, reasons = flag_card(chases, args.name, args.set_code, args.rarity)
+    flag, reasons = flag_card(chases, args.name, args.set_code, args.rarity,
+                              number=args.number, card_set=args.card_set)
     print(f"\nFLAG: {flag}")
     for r in reasons:
         if r["source"] == "watchlist":
             age = "undated" if not r.get("verified_on") else r["verified_on"]
-            print(f"  - watchlist: {r['row']}  (snapshot: {age})")
+            print(f"  - watchlist: {r['row']}  [{r['match']}]  (snapshot: {age})")
             if r.get("grade_watch"):
                 print(f"      {r['grade_watch']}")
+        elif r["source"] == "set_rule":
+            print(f"  - set rule:   {r['match']}")
         else:
             print(f"  - structural: {r['match']}")
 
@@ -319,7 +380,7 @@ def main():
         print("\nPASS — logged, no stub. Next card.")
         sys.exit(3)
 
-    p = emit_stub(args.name, args.set_code, args.game, cent, flag, reasons, args.out)
+    p = emit_stub(args.name, args.set_code or args.number, args.card_set or args.game, cent, flag, reasons, args.out)
     print(f"\nstub → {p}   (all prices null; evcalc will refuse until you enter comps)")
 
 
