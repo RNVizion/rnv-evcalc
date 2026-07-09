@@ -1,29 +1,15 @@
 {
   "_schema": "2.0",
-  "_changed": "2026-07-09: roundtrip_ship_insured (scalar, per-card) replaced by shipping.bands (per-order, keyed by declared value and card count). The old field lied: PSA and BGS both bill shipping per shipment, not per card, and both scale with declared value.",
-  "_rule": "No number enters this file without a verified_on date. Anything unverified stays null and triggers REFUSED.",
+  "_changed": "2026-07-09: tier.roundtrip_ship_insured (per-card scalar) removed. Shipping now lives at SERVICE level as band-keyed per-order cost, because (a) both graders bill per shipment, not per card, and (b) the Beckett wizard showed identical insurance/return at Base and Standard, so shipping keys off declared value, not tier.",
+  "_rule": "No number enters this file without a verified_on date. Unverified stays null and triggers REFUSED.",
 
   "grading_services": {
     "psa": {
-      "tier_name": "Regular",
-      "fee_per_card": 79.99,
-      "fee_verified_on": "2026-07-09",
-      "max_declared_value": null,
-      "_max_declared_value_note": "[verify] Regular tier's declared-value ceiling not captured; the wizard accepted $250 without complaint.",
-
-      "turnaround": {
-        "value": null,
-        "unit": "calendar_days",
-        "verified_on": null,
-        "_note": "[verify] Sources conflict: PSA Regular reported anywhere from 40-60 to ~70 calendar days in 2026. Do not assert. Pull the live estimate from the submission wizard at submit time."
-      },
-
-      "subgrades": false,
-
       "shipping": {
         "model": "per_order",
         "inbound_paid_to_service": true,
-        "_inbound_note": "PSA sells the inbound FedEx label; the charge posts after package drop-off, not at checkout. Shipping outbound yourself (USPS or FedEx only, never UPS/DHL) may beat this and is an open optimization.",
+        "transit_days_roundtrip": 0,
+        "_transit_note": "PSA's turnaround figure is quoted in calendar days; transit is folded in here as 0 pending confirmation. [verify]",
         "bands": [
           {
             "n_cards_max": 1,
@@ -33,101 +19,74 @@
             "insured_return": 19.99,
             "order_total": 42.48,
             "verified_on": "2026-07-09",
-            "source": "PSA Online Submission Center, Submission Summary screen, Regular tier, 1 item, $250 declared value"
+            "source": "PSA Online Submission Center, Submission Summary, Regular, 1 item, $250 declared"
           }
         ]
       },
-
-      "_all_in_single_card_at_250": 122.47,
-      "_all_in_verified_on": "2026-07-09"
+      "tiers": {
+        "regular": {
+          "fee": 79.99,
+          "turnaround_days": null,
+          "turnaround_unit": "calendar_days",
+          "verified_on": "2026-07-09",
+          "_turnaround_note": "[confirm/fill] Sources conflict (40-60 vs ~70 calendar days). Null on purpose: this REFUSES until Chris reads the live estimate off the wizard."
+        }
+      }
     },
 
     "bgs": {
-      "tier_name": "Standard (with subgrades)",
-      "fee_per_card": 34.95,
-      "fee_verified_on": "2026-07-09",
-      "max_declared_value": null,
-      "_max_declared_value_note": "[verify] Beckett publishes no declared-value caps on these service levels.",
-
-      "turnaround": {
-        "value": 45,
-        "unit": "business_days",
-        "verified_on": "2026-07-09",
-        "excludes_transit": true,
-        "_note": "Business days while the card is in Beckett's possession. Transit both ways is on top. 45 business days is roughly 9 calendar weeks."
-      },
-
-      "subgrades": true,
-
       "shipping": {
         "model": "per_order",
         "inbound_paid_to_service": false,
-        "_inbound_note": "[confirm/fill] Beckett does not sell an inbound label in this flow; you ship to Dallas yourself. Outbound insured cost is NOT yet captured and must be added before any BGS-vs-PSA comparison is honest.",
+        "transit_days_roundtrip": null,
+        "_transit_note": "[confirm/fill] Beckett quotes BUSINESS days excluding transit, so this is required, not cosmetic.",
         "bands": [
           {
             "n_cards_max": 1,
             "declared_value_total_max": 250,
             "inbound_label": null,
             "inbound_insurance": null,
-            "insured_return": 28.00,
             "insurance": 4.50,
+            "insured_return": 28.00,
             "order_total_excl_outbound": 32.50,
             "verified_on": "2026-07-09",
-            "source": "Beckett submission wizard, Order Summary, Standard With Subgrades, 1 card",
-            "_note": "Insurance and return shipping were identical at the Base tier, so these bands key off declared value, not service level. Declared value assumed $250 to match the PSA quote — [verify] that the Beckett flow took the same figure."
+            "source": "Beckett wizard, Order Summary, 1 card. Identical at Base and Standard, so band keys on declared value, not tier.",
+            "_outbound_note": "[confirm/fill] You ship to Dallas yourself. Until outbound is entered, BGS totals are NOT round trips."
           }
         ]
       },
-
-      "_all_in_single_card_at_250_excl_outbound": 67.45,
-      "_all_in_verified_on": "2026-07-09"
-    },
-
-    "bgs_base": {
-      "tier_name": "Base (with subgrades)",
-      "fee_per_card": 17.95,
-      "fee_verified_on": "2026-07-09",
-      "_fee_without_subgrades": 14.95,
-      "_subgrade_upcharge_note": "$3 upcharge for any 10s where subgrades are added.",
-
-      "turnaround": {
-        "value": 75,
-        "unit": "business_days",
-        "verified_on": "2026-07-09",
-        "excludes_transit": true,
-        "open_ended": true,
-        "_note": "Listed as '75+'. The plus is load-bearing: treat as a floor, not an estimate. ~15 calendar weeks minimum, plus transit."
-      },
-
-      "subgrades": true,
-
-      "shipping": {
-        "model": "per_order",
-        "inbound_paid_to_service": false,
-        "bands": [
-          {
-            "n_cards_max": 1,
-            "declared_value_total_max": 250,
-            "insured_return": 28.00,
-            "insurance": 4.50,
-            "order_total_excl_outbound": 32.50,
-            "verified_on": "2026-07-09",
-            "source": "Beckett submission wizard, Order Summary, Base With Subgrades, 1 card"
-          }
-        ]
-      },
-
-      "_all_in_single_card_at_250_excl_outbound": 50.45,
-      "_all_in_verified_on": "2026-07-09"
+      "tiers": {
+        "base": {
+          "fee": 17.95,
+          "turnaround_days": 75,
+          "turnaround_unit": "business_days",
+          "turnaround_open_ended": true,
+          "verified_on": "2026-07-09",
+          "_note": "Listed as '75+'. Treat as a floor. Fee is with subgrades; $14.95 without, plus $3 upcharge for any 10s when subgrades are added."
+        },
+        "standard": {
+          "fee": 34.95,
+          "turnaround_days": 45,
+          "turnaround_unit": "business_days",
+          "verified_on": "2026-07-09",
+          "_note": "With subgrades. 45 business days ~= 63 calendar days, plus transit."
+        }
+      }
     }
   },
 
-  "graded_price_multiplier_note": "Grading fee is not the deciding cost. The same physical card nets differently by slab: PSA commands the premium in vintage and Pokemon; BGS grades harder, so a BGS 9.5 often reflects what PSA would call a 10. Model this as DIFFERENT graded-price nodes per service in the per-card file, never as one price with a swapped fee. [verify] per card, per service, with dated sold comps.",
+  "graded_price_guard": {
+    "enforce_service_match": true,
+    "_note": "BGS grades harder: a BGS 9.5 often reflects what PSA calls a 10, and for Pokemon a 9.5 can trade below raw. Feeding PSA comps to a BGS submission hands BGS a win it never earned. graded_prices_service on the card must equal grading.service."
+  },
 
-  "marketplace_fees": {
-    "_note": "[verify] Not yet captured. Enter current, dated values before any verdict is trusted.",
-    "ebay_raw": { "pct": null, "flat": null, "verified_on": null },
-    "ebay_graded": { "pct": null, "flat": null, "verified_on": null }
+  "marketplaces": {
+    "ebay": {
+      "pct": null,
+      "flat": null,
+      "verified_on": null,
+      "_note": "[confirm/fill] Not captured. Blocks every verdict, by design."
+    }
   },
 
   "thresholds": {
