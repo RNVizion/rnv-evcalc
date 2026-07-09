@@ -81,11 +81,15 @@ def resolve_order_shipping(fees, service, n_cards, declared_value_total):
 
 
 def turnaround_calendar_days(fees, service, tier_name, business_days_per_week=5):
-    """Total calendar days the card is gone: grading + round-trip transit.
+    """Grading time in calendar days, plus transit (which may be None).
 
-    Comparing Beckett's business-day quote to a calendar-date sale window is how
-    a November deadline gets missed on paper and then in the mail.
-    Returns (calendar_days, problems).
+    Comparing Beckett's or PSA's business-day quote to a calendar-date sale window
+    is how a November deadline gets missed on paper and then in the mail. Both
+    graders start their clock at intake, so transit is always additional.
+
+    Returns (grading_calendar_days, transit_days_or_None, problems).
+    Transit being None is not fatal on its own: it only matters when a sale
+    window is in play. The caller decides.
     """
     problems = []
     svc = (fees.get("grading_services") or {}).get(service) or {}
@@ -99,7 +103,7 @@ def turnaround_calendar_days(fees, service, tier_name, business_days_per_week=5)
             f"grading_services.{service}.tiers.{tier_name}.turnaround_days: "
             "not filled (read the live estimate off the wizard)"
         )
-        return None, problems
+        return None, None, problems
 
     if unit == "calendar_days":
         grading_days = int(value)
@@ -107,14 +111,7 @@ def turnaround_calendar_days(fees, service, tier_name, business_days_per_week=5)
         grading_days = int(round(value / business_days_per_week * 7))
     else:
         problems.append(f"turnaround_unit: unrecognized {unit!r}")
-        return None, problems
+        return None, None, problems
 
     transit = shipping.get("transit_days_roundtrip")
-    if transit is None:
-        problems.append(
-            f"grading_services.{service}.shipping.transit_days_roundtrip: "
-            "not filled; this tier excludes transit, so the window math is wrong without it"
-        )
-        return None, problems
-
-    return grading_days + int(transit), problems
+    return grading_days, (None if transit is None else int(transit)), problems
