@@ -7,15 +7,21 @@ verification checklist, not a verdict. Spec: SPEC_grading_ev_calculator.md.
 Usage:
     python3 evcalc.py cards/my-card.json
     python3 evcalc.py --batch cards/
+    python3 evcalc.py --batch cards/ --order-cards 5 --order-declared-value 900
     python3 evcalc.py --fees other_fees.json cards/my-card.json
 """
 
 import argparse
 import csv
 import json
-import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
+
+from shipping import (
+    ShippingUnverified,
+    resolve_order_shipping,
+    turnaround_calendar_days,
+)
 
 GRADES = ("10", "9", "8", "le7")
 
@@ -60,7 +66,7 @@ def check_fee_block(block, label, staleness_days, today, required, problems):
         problems.append(f"{label}.verified_on: missing")
 
 
-def evaluate(card, fees, today=None):
+def evaluate(card, fees, today=None, order_cards=1, order_declared_value=None):
     today = today or date.today()
     cfg_stale = fees.get("staleness_days", 30)
     problems = []
@@ -89,13 +95,52 @@ def evaluate(card, fees, today=None):
     svc = (card.get("grading") or {}).get("service")
     tier_name = (card.get("grading") or {}).get("tier")
     tier = ((fees.get("grading_services", {}).get(svc) or {}).get("tiers", {}) or {}).get(tier_name)
+
+    # CHANGED: roundtrip_ship_insured no longer lives on the tier.
     check_fee_block(
         tier, f"grading_services.{svc}.tiers.{tier_name}", cfg_stale, today,
-        ("fee", "roundtrip_ship_insured", "turnaround_days"), problems,
+        ("fee", "turnaround_days"), problems,
     )
 
+    # NEW: a BGS 9.5 is not a PSA 10. Comps must be for the slab being bought.
+    if (fees.get("graded_price_guard") or {}).get("enforce_service_match"):
+        comp_svc = card.get("graded_prices_service")
+        if comp_svc is None:
+            problems.append("graded_prices_service: missing (which grader are these comps for?)")
+        elif comp_svc != svc:
+            problems.append(
+                f"graded_prices_service is {comp_svc!r} but grading.service is {svc!r}: "
+                "graded comps must come from the slab you intend to buy"
+            )
+
+    # NEW: shipping is per-order and priced off declared value.
+    declared = card.get("declared_value")
+    if declared is None:
+        problems.append("declared_value: missing (your estimate of the card's value AFTER grading)")
+
+    ship_quote = None
+    if declared is not None and svc:
+        dv_total = order_declared_value if order_declared_value is not None else declared * order_cards
+        try:
+            ship_quote = resolve_order_shipping(fees, svc, order_cards, dv_total)
+        except ShippingUnverified as e:
+            problems.append(str(e))
+
+    # NEW: unit-aware turnaround; business days and transit are not calendar days.
+    lock_days = None
+    if svc and tier_name:
+        cal_days, t_problems = turnaround_calendar_days(fees, svc, tier_name)
+        problems.extend(t_problems)
+        if cal_days is not None:
+            lock_days = cal_days + int(fees.get("relist_buffer_days", 7))
+
     if problems:
-        return {"verdict": "REFUSED", "problems": problems, "card": card.get("name", "?")}
+        seen, uniq = set(), []
+        for pr in problems:
+            if pr not in seen:
+                seen.add(pr)
+                uniq.append(pr)
+        return {"verdict": "REFUSED", "problems": uniq, "card": card.get("name", "?")}
 
     ship_raw = float(card.get("ship_raw_seller", 0))
     ship_graded = float(card.get("ship_graded_seller", 0))
@@ -105,7 +150,8 @@ def evaluate(card, fees, today=None):
         return {"verdict": "REFUSED", "problems": [f"net_raw is {net_raw:.2f}; nothing to compare"], "card": card.get("name", "?")}
 
     ev_gross = sum(p[g] * graded_prices[g] for g in GRADES)
-    grading_cost = tier["fee"] + tier["roundtrip_ship_insured"]
+    # CHANGED: per-card share of a per-order shipping cost.
+    grading_cost = tier["fee"] + ship_quote.per_card
     net_graded = ev_gross * (1 - mk_graded["pct"]) - mk_graded["flat"] - grading_cost - ship_graded
 
     th = fees["thresholds"]
@@ -137,7 +183,6 @@ def evaluate(card, fees, today=None):
     frag_passes = (delta_frag / net_raw) >= th["rel_uplift"] and delta_frag >= th["abs_floor"]
     fragile = passes and not frag_passes
 
-    lock_days = int(tier["turnaround_days"]) + int(fees.get("relist_buffer_days", 7))
     timing = ""
     if card.get("sale_window"):
         back_by = today + timedelta(days=lock_days)
@@ -162,6 +207,10 @@ def evaluate(card, fees, today=None):
         "current_p10": p["10"],
         "fragile": fragile,
         "capital_lock_days": lock_days,
+        "ship_per_card": ship_quote.per_card,
+        "ship_order_total": ship_quote.order_total,
+        "ship_includes_outbound": ship_quote.includes_outbound,
+        "ship_note": ship_quote.note,
         "timing": timing,
         "as_of_oldest": min(
             n["as_of"]
@@ -190,6 +239,10 @@ def print_report(r):
                 f"break-even PSA-10: {r['breakeven_p10'] * 100:.0f}% "
                 f"(your estimate: {r['current_p10'] * 100:.0f}%)"
             )
+    ship_line = f"shipping           ${r['ship_per_card']}/card (order ${r['ship_order_total']})"
+    if not r["ship_includes_outbound"]:
+        ship_line += "  ** " + r["ship_note"]
+    print(ship_line)
     print(f"capital locked     ~{r['capital_lock_days']} days")
     if r["timing"]:
         print(f"timing             {r['timing']}")
@@ -201,14 +254,23 @@ def main():
     ap.add_argument("target", help="card JSON, or a directory with --batch")
     ap.add_argument("--batch", action="store_true")
     ap.add_argument("--fees", default="fees.json")
+    ap.add_argument("--order-cards", type=int, default=1,
+                    help="price cards as part of one submission of N cards (shipping is per order)")
+    ap.add_argument("--order-declared-value", type=float, default=None,
+                    help="total declared value of that submission")
     args = ap.parse_args()
 
     fees = load_json(args.fees)
 
     if args.batch:
+        if args.order_cards == 1:
+            print("NOTE: each card priced as its own single-card submission (conservative).")
+            print("      Shipping is per ORDER: once you know which cards ship together,")
+            print("      re-run with --order-cards N --order-declared-value V.\n")
         rows = []
         for f in sorted(Path(args.target).glob("[!_]*.json")):
-            r = evaluate(load_json(f), fees)
+            r = evaluate(load_json(f), fees, order_cards=args.order_cards,
+                         order_declared_value=args.order_declared_value)
             print_report(r)
             rows.append(r)
         decided = [r for r in rows if r["verdict"] != "REFUSED"]
@@ -222,7 +284,9 @@ def main():
             print(f"\nbatch report → {out} ({len(decided)} decided, "
                   f"{len(rows) - len(decided)} refused)")
     else:
-        print_report(evaluate(load_json(args.target), fees))
+        print_report(evaluate(load_json(args.target), fees,
+                              order_cards=args.order_cards,
+                              order_declared_value=args.order_declared_value))
 
 
 if __name__ == "__main__":
