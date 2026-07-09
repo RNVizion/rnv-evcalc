@@ -1,0 +1,1902 @@
+{
+  "_source": "RNV_Rip_Sheet_Chase_Cards.md",
+  "_generated": "2026-07-09",
+  "_rule": "A row NEVER carries a price unless it carries a verified_on date. The flag reports the row and its age, not a value.",
+  "staleness_days": 30,
+  "structural_markers": {
+    "_note": "Source 2 of the flag: fires independent of any row below. Catches the obviously special card no list anticipated.",
+    "rarity_keywords": [
+      "secret",
+      "ultra secret",
+      "starlight",
+      "prismatic",
+      "quarter century",
+      "platinum secret",
+      "ghost",
+      "collector",
+      "alternate art",
+      "special illustration",
+      "superfractor",
+      "raywave",
+      "diamante",
+      "black label",
+      "1st edition",
+      "ultimate rare",
+      "ultimate",
+      "overnumber",
+      "overnumbered",
+      "signature",
+      "epic foil",
+      "collector's rare",
+      "collectors rare",
+      "showcase",
+      "starlight rare",
+      "diamond rare",
+      "diamond ur",
+      "binding prism",
+      "master rare",
+      "lenticular",
+      "scenario-e",
+      "ninjutsu secrets",
+      "ukiyo-e",
+      "connecting battle",
+      "serialized"
+    ],
+    "serial_number_regex": "\\b\\d{1,4}\\s*/\\s*\\d{1,4}\\b",
+    "one_of_one_regex": "\\b1\\s*/\\s*1\\b",
+    "other_markers": [
+      "autograph",
+      "auto",
+      "sketch card",
+      "shadowbox",
+      "relic",
+      "jersey"
+    ],
+    "asterisk_signature_note": "In Riftbound, an asterisk in the card number marks an artist-signed overnumber. Handled in code, not by regex on the name.",
+    "diamond_symbols": [
+      "\u25c7",
+      "\u2662",
+      "\u25c6"
+    ]
+  },
+  "chases": [
+    {
+      "game": "ygo",
+      "name": "Tour Guide From the Underworld",
+      "set_codes": [
+        "RA05-EN090",
+        "BLGG-EN005",
+        "RA01-EN005",
+        "RA04-EN157"
+      ],
+      "rarity_any_of": [
+        "secret",
+        "ultra",
+        "starlight",
+        "quarter century",
+        "platinum secret"
+      ],
+      "why": "Chase pedigree; value swings hard by printing. BP01/CT09 printings are bulk.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Printing-dependent. Confirm set code before any value claim."
+    },
+    {
+      "game": "ygo",
+      "name": "Dark Armed Dragon",
+      "set_codes": [],
+      "rarity_any_of": [
+        "secret",
+        "ultra secret",
+        "starlight"
+      ],
+      "why": "Original 2007 Phantom Darkness secret carries value; every reprint (SDDC-EN012 etc.) is low.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Reprint unless proven otherwise."
+    },
+    {
+      "game": "naruto",
+      "name": "Interlude Theater \u2014 Scenario-E (SE)",
+      "set_codes": [],
+      "rarity_any_of": [
+        "se",
+        "scenario-e"
+      ],
+      "why": "Named premium chase of the Smriti Heaven Scroll Edition (158 cards, 10 rarity levels). (Heaven Scroll Edition; SE here = Interlude Theater Scenario-E.)",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou; a $10,000 bounty stands for all four English chases in PSA 10. Graded demand is real.",
+      "set": "heaven-scroll"
+    },
+    {
+      "game": "naruto",
+      "name": "Color Window \u2014 Special (SP)",
+      "set_codes": [],
+      "rarity_any_of": [
+        "sp",
+        "color window"
+      ],
+      "why": "Stained-glass premium chase, Heaven Scroll Edition. (Heaven Scroll Edition; SE here = Interlude Theater Scenario-E.)",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Same bounty context as SE.",
+      "set": "heaven-scroll"
+    },
+    {
+      "game": "naruto",
+      "name": "Konan (US exclusive)",
+      "set_codes": [],
+      "rarity_any_of": [],
+      "why": "US-exclusive card in the Heaven Scroll Edition. (Heaven Scroll Edition; SE here = Interlude Theater Scenario-E.)",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "[verify] whether the US exclusivity carries a premium.",
+      "set": "heaven-scroll"
+    },
+    {
+      "game": "disney_topps",
+      "name": "SuperFractor 1/1",
+      "set_codes": [],
+      "rarity_any_of": [
+        "superfractor"
+      ],
+      "why": "Top of the 2026 Topps Chrome Disney rainbow.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Retail odds are far worse than hobby. A guaranteed Raywave/Diamante is NOT this."
+    },
+    {
+      "game": "disney_topps",
+      "name": "Red Refractor /5 and Raywave Refractor /5",
+      "set_codes": [],
+      "rarity_any_of": [
+        "red refractor",
+        "raywave refractor"
+      ],
+      "why": "The /5 tier. Raywave Refractor /5 runs 1:32,356 hobby but 1:197,334 blaster and 1:209,189 value.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Chromium: check centering, print lines, and edge chipping straight from the pack."
+    },
+    {
+      "game": "disney_topps",
+      "name": "Autographs (Depp, Cyrus, Lovato, Goodwin; Pirates triple; Princess quad)",
+      "set_codes": [],
+      "rarity_any_of": [
+        "autograph",
+        "auto"
+      ],
+      "why": "The real chase. First-time signers.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "On-card vs sticker matters. [verify]"
+    },
+    {
+      "game": "disney_topps",
+      "name": "Debut cards (Toy Story 5, Zootopia 2)",
+      "set_codes": [],
+      "rarity_any_of": [],
+      "why": "The set's rookie-card analogue; Toy Story 5 and Zootopia 2 flagged as driving strongest pre-release demand.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Demand is hype-derived and may decay. Date any comp."
+    },
+    {
+      "game": "riftbound",
+      "name": "[confirm/fill] Riftbound chase list",
+      "set_codes": [],
+      "rarity_any_of": [
+        "secret",
+        "alternate art",
+        "1 of 1"
+      ],
+      "why": "No machine-readable DB available (DotGG API is access-gated). For this game the sheet IS the system.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity comes off the card's printed set code and collector number."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Meowth ex",
+      "card_numbers": [
+        "121"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "special illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #121, special illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Zygarde ex",
+      "card_numbers": [
+        "124"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "gold hyper rare / mega hyper rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #124, gold hyper rare / mega hyper rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Zygarde ex",
+      "card_numbers": [
+        "120"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "special illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #120, special illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Rosa's Encouragement",
+      "card_numbers": [
+        "123"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "special illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #123, special illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Clefable ex",
+      "card_numbers": [
+        "119"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "special illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #119, special illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Starmie ex",
+      "card_numbers": [
+        "118"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "special illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #118, special illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Clefairy",
+      "card_numbers": [
+        "094"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #094, illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Jacinthe",
+      "card_numbers": [
+        "122"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "special illustration rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #122, special illustration rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Poke Pad",
+      "card_numbers": [
+        "113"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #113, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Meowth ex",
+      "card_numbers": [
+        "107"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #107, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Zygarde ex",
+      "card_numbers": [
+        "104"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #104, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Rosa's Encouragement",
+      "card_numbers": [
+        "114"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #114, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Clefable ex",
+      "card_numbers": [
+        "103"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #103, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Starmie ex",
+      "card_numbers": [
+        "102"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #102, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Yveltal ex",
+      "card_numbers": [
+        "105"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #105, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Mega Skarmory ex",
+      "card_numbers": [
+        "106"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #106, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Lumiose City",
+      "card_numbers": [
+        "111"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #111, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Tarragon",
+      "card_numbers": [
+        "116"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #116, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Decidueye ex",
+      "card_numbers": [
+        "100"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #100, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "name": "Salazzle ex",
+      "card_numbers": [
+        "101"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Perfect Order top-20 chase list (Chris, 2026-07-09). #101, ultra rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA route: PSA-10 multiplier is far higher for Pokemon than a BGS 9.5. Chase-list ORDER is unsourced; identity is what this row asserts."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Baron Nashor",
+      "card_numbers": [
+        "238"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultimate rare",
+        "ultimate"
+      ],
+      "why": "Only Ultimate Rare in Unleashed. Riot: appears in <0.1% of packs; max one per pack. 238/219.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Diana - Scorn of the Moon",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "LeBlanc - Deceiver",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Vex - Gloomist",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Vi - Piltover Enforcer",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Pyke - Bloodharbor Ripper",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Poppy - Keeper of the Hammer",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Kha'Zix - Voidreaver",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Lillia - Bashful Bloom",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Rengar - Pridestalker",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered signature",
+        "signature"
+      ],
+      "why": "Overnumbered Signature (artist-signed). Asterisk in card number.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Lillia - Bashful Bloom",
+      "card_numbers": [
+        "230"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Vi - Piltover Enforcer",
+      "card_numbers": [
+        "229"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Daring Poro",
+      "card_numbers": [
+        "225"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Mystic Poro",
+      "card_numbers": [
+        "224"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "LeBlanc - Deceiver",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Diana - Scorn of the Moon",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Vex - Gloomist",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "overnumbered alternate art",
+        "overnumber",
+        "alt art"
+      ],
+      "why": "Overnumbered Alternate Art (unsigned).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Void Assault",
+      "card_numbers": [
+        "202"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "epic foil",
+        "epic"
+      ],
+      "why": "Epic Foil. NOTE: numbered BELOW 220, so the set rule will not catch it. Named row only.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Rengar - Trophy Hunter",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "epic foil",
+        "epic"
+      ],
+      "why": "Epic Foil. NOTE: numbered BELOW 220, so the set rule will not catch it. Named row only.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "name": "Cursed Sarcophagus",
+      "card_numbers": [
+        "148"
+      ],
+      "set_codes": [],
+      "rarity_any_of": [
+        "epic foil",
+        "epic"
+      ],
+      "why": "Epic Foil. NOTE: numbered BELOW 220, so the set rule will not catch it. Named row only.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Identity from the printed set code (UNL) and collector number. An asterisk in the number = artist signature. List ORDER is unsourced."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "K9-17 Izuna",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "starlight rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, starlight rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "Dracotail Faimena",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "starlight rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, starlight rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "Dracotail Lukias",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "starlight rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, starlight rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "CupsyYummy",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "starlight rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, starlight rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "Dracotail Arthalion",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "starlight rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, starlight rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "YummySnatchy",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "starlight rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, starlight rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "Sky Striker Mecha - Hornet Drones",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "Rahu Dracotail",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "K9-17 Izuna",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "K9-17 \"Ripper\"",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "YummySnatchy",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "CupsyYummy",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "Dracotail Lukias",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "A Case for K9",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "collector's rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, collector's rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "name": "K9-17 Izuna",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ultra rare"
+      ],
+      "why": "Justice Hunters (JUSH) chase list, ultra rare. Set: 60 cards; 10 Starlight, 15 Collector's Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "JUSH-EN### set code confirms identity. Starlight and Collector's Rare auto-flag structurally. PSA route for YGO."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto Uzumaki",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Sasuke Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Itachi Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Rock Lee",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Gaara",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Kakashi Hatake",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Minato Namikaze",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Madara Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond asp"
+      ],
+      "why": "Chapter Jin S3 diamond ASP, serialized /9. Top tier: 8 types, /9.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto Uzumaki",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Sasuke Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Itachi Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Rock Lee",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Gaara",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Kakashi Hatake",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Minato Namikaze",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Madara Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "asp"
+      ],
+      "why": "Chapter Jin S3 ASP, serialized /99. 8 types, /99.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Jiraiya & Gamabunta",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ar"
+      ],
+      "why": "Chapter Jin S3 AR, serialized /777. Ukiyo-e. 6 types total; list names 2.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Tsunade",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ar"
+      ],
+      "why": "Chapter Jin S3 AR, serialized /777. Ukiyo-e. 6 types total; list names 2.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto & Jiraiya",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "se"
+      ],
+      "why": "Chapter Jin S3 SE, serialized /220. SE = Scenario-E (Elegant Costume Drama), NOT 'Special Edition'.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Sasuke & Itachi",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "se"
+      ],
+      "why": "Chapter Jin S3 SE, serialized /220. SE = Scenario-E (Elegant Costume Drama), NOT 'Special Edition'.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Minato Namikaze",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "se"
+      ],
+      "why": "Chapter Jin S3 SE, serialized /220. SE = Scenario-E (Elegant Costume Drama), NOT 'Special Edition'.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Madara Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "se"
+      ],
+      "why": "Chapter Jin S3 SE, serialized /220. SE = Scenario-E (Elegant Costume Drama), NOT 'Special Edition'.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Itachi Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto Uzumaki",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Sasuke Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Kakashi Hatake",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Minato Namikaze",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Madara Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Gaara",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "bp"
+      ],
+      "why": "Chapter Jin S3 BP, serialized /999. Binding Prism, ink painting.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto Uzumaki",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond ur"
+      ],
+      "why": "Chapter Jin S3 diamond UR. Listed as 'UR Diamond Graffiti'; official name is diamondUR (Diamond UR).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Sasuke Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond ur"
+      ],
+      "why": "Chapter Jin S3 diamond UR. Listed as 'UR Diamond Graffiti'; official name is diamondUR (Diamond UR).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Itachi Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond ur"
+      ],
+      "why": "Chapter Jin S3 diamond UR. Listed as 'UR Diamond Graffiti'; official name is diamondUR (Diamond UR).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Kakashi Hatake",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "diamond ur"
+      ],
+      "why": "Chapter Jin S3 diamond UR. Listed as 'UR Diamond Graffiti'; official name is diamondUR (Diamond UR).",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Minato Namikaze",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "mr"
+      ],
+      "why": "Chapter Jin S3 MR. Master Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Itachi Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "mr"
+      ],
+      "why": "Chapter Jin S3 MR. Master Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Sasuke Uchiha",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "mr"
+      ],
+      "why": "Chapter Jin S3 MR. Master Rare.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto Uzumaki",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ur"
+      ],
+      "why": "Chapter Jin S3 UR. Ultra Rare, silhouetted portrait.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Pain",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "hr"
+      ],
+      "why": "Chapter Jin S3 HR. Lenticular 3D.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Naruto & Sasuke",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "ssr"
+      ],
+      "why": "Chapter Jin S3 SSR. [verify] 'SSR Connecting Battle' not in the verified 13-rarity ladder; may be a panoramic AR/BP.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Kidomaru",
+      "card_numbers": [],
+      "set_codes": [],
+      "rarity_any_of": [
+        "sr"
+      ],
+      "why": "Chapter Jin S3 SR. [verify] Verified sources say the US-exclusive promo is Naruto PR-009 or Sasuke PR-010, not Kidomaru.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    }
+  ],
+  "set_rules": [
+    {
+      "game": "pokemon",
+      "set": "perfect-order",
+      "aliases": [
+        "perfect order",
+        "perfect-order",
+        "me03",
+        "me3"
+      ],
+      "base_set_size": 88,
+      "total_cards": 124,
+      "secret_from": 89,
+      "why": "88 base + 36 secret rares = 124. Any collector number >= 89 is a secret rare, whether or not it is named below.",
+      "verified_on": "2026-07-09",
+      "sources": "PokeBeach set guide; Beckett ME03 checklist; CardGrader (#124/088, #121/088)"
+    },
+    {
+      "game": "riftbound",
+      "set": "unleashed",
+      "aliases": [
+        "unleashed",
+        "unl",
+        "riftbound unleashed"
+      ],
+      "base_set_size": 219,
+      "secret_from": 220,
+      "why": "219-card main set; overnumber cards begin at 220. Baron Nashor Ultimate Rare is 238/219.",
+      "verified_on": "2026-07-09",
+      "sources": "Card Gamer (219 main set, overnumber begins 220, Baron 238/219); riftdaily; Riot's own Unleashed overview (<0.1% of packs, one Ultimate Rare max per pack)"
+    },
+    {
+      "game": "ygo",
+      "set": "justice-hunters",
+      "aliases": [
+        "justice hunters",
+        "jush",
+        "justice-hunters"
+      ],
+      "base_set_size": 60,
+      "secret_from": 9999,
+      "why": "No overnumbering: all 60 cards are base-numbered. Chase status comes from RARITY (Starlight, Collector's Rare), which the structural markers catch. secret_from disabled.",
+      "verified_on": "2026-07-09",
+      "sources": "Konami product page (yugioh-card.com/en/products/jush/); Yugipedia; 60 cards = 10 UR / 10 SR / 40 R, plus 10 Starlight + 15 Collector's Rare"
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "aliases": [
+        "chapter jin",
+        "chapter-jin",
+        "jin 3",
+        "jin series 3",
+        "series 3",
+        "003"
+      ],
+      "base_set_size": 185,
+      "secret_from": 9999,
+      "serialized_denominators": [
+        9,
+        99,
+        220,
+        777,
+        999
+      ],
+      "chase_rarity_codes": [
+        "asp",
+        "bp",
+        "ar",
+        "hr",
+        "mr",
+        "ur",
+        "se",
+        "ssr"
+      ],
+      "why": "185 cards / 13 rarities. FIVE serialized chase tiers: diamondASP /9, ASP /99, SE /220, AR /777, BP /999. Any serial number = chase. New types this set: ASP, diamondASP, diamondUR.",
+      "verified_on": "2026-07-09",
+      "sources": "Crossing TCG + 9 Tails (185 cards/13 rarities, 5 serialized tiers, exact denominators); Kayou official reveal via Andy Collectz",
+      "_conflict": "[verify] GameStop/Best Buy list 177 cards / 12 rarities for the 003A sleeved booster; retailers list 185/13 for the display box. Likely different SKUs. Does not affect the serial rule."
+    }
+  ]
+}
