@@ -97,9 +97,11 @@ def evaluate(card, fees, today=None, order_cards=1, order_declared_value=None):
     tier = ((fees.get("grading_services", {}).get(svc) or {}).get("tiers", {}) or {}).get(tier_name)
 
     # CHANGED: roundtrip_ship_insured no longer lives on the tier.
+    # turnaround_days is checked by turnaround_calendar_days(), which knows the unit
+    # and gives better guidance; don't double-report it here.
     check_fee_block(
         tier, f"grading_services.{svc}.tiers.{tier_name}", cfg_stale, today,
-        ("fee", "turnaround_days"), problems,
+        ("fee",), problems,
     )
 
     # NEW: a BGS 9.5 is not a PSA 10. Comps must be for the slab being bought.
@@ -128,11 +130,22 @@ def evaluate(card, fees, today=None, order_cards=1, order_declared_value=None):
 
     # NEW: unit-aware turnaround; business days and transit are not calendar days.
     lock_days = None
+    lock_is_floor = False
     if svc and tier_name:
-        cal_days, t_problems = turnaround_calendar_days(fees, svc, tier_name)
+        grading_cal, transit, t_problems = turnaround_calendar_days(fees, svc, tier_name)
         problems.extend(t_problems)
-        if cal_days is not None:
-            lock_days = cal_days + int(fees.get("relist_buffer_days", 7))
+        if grading_cal is not None:
+            if transit is None:
+                # Both graders start the clock at intake, so transit is always extra.
+                # Unknown transit understates the lock but never changes the dollars.
+                lock_is_floor = True
+                if card.get("sale_window"):
+                    problems.append(
+                        f"grading_services.{svc}.shipping.transit_days_roundtrip: not filled. "
+                        "The grader's clock starts at intake, so a sale-window verdict "
+                        "needs the mail time. (Only blocks timing, not the dollars.)"
+                    )
+            lock_days = grading_cal + (transit or 0) + int(fees.get("relist_buffer_days", 7))
 
     if problems:
         seen, uniq = set(), []
@@ -207,6 +220,7 @@ def evaluate(card, fees, today=None, order_cards=1, order_declared_value=None):
         "current_p10": p["10"],
         "fragile": fragile,
         "capital_lock_days": lock_days,
+        "capital_lock_is_floor": lock_is_floor,
         "ship_per_card": ship_quote.per_card,
         "ship_order_total": ship_quote.order_total,
         "ship_includes_outbound": ship_quote.includes_outbound,
@@ -243,7 +257,10 @@ def print_report(r):
     if not r["ship_includes_outbound"]:
         ship_line += "  ** " + r["ship_note"]
     print(ship_line)
-    print(f"capital locked     ~{r['capital_lock_days']} days")
+    lock = f"capital locked     ~{r['capital_lock_days']} days"
+    if r.get("capital_lock_is_floor"):
+        lock += "  (FLOOR — transit unknown, real lock is longer)"
+    print(lock)
     if r["timing"]:
         print(f"timing             {r['timing']}")
     print(f"oldest comp        {r['as_of_oldest']}")
