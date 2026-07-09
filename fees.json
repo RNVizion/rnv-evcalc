@@ -2,20 +2,19 @@
   "_schema": "2.0",
   "_changed": "2026-07-09: tier.roundtrip_ship_insured (per-card scalar) removed. Shipping now lives at SERVICE level as band-keyed per-order cost, because (a) both graders bill per shipment, not per card, and (b) the Beckett wizard showed identical insurance/return at Base and Standard, so shipping keys off declared value, not tier.",
   "_rule": "No number enters this file without a verified_on date. Unverified stays null and triggers REFUSED.",
-
   "grading_services": {
     "psa": {
       "shipping": {
         "model": "per_order",
         "inbound_paid_to_service": true,
-        "transit_days_roundtrip": 0,
-        "_transit_note": "PSA's turnaround figure is quoted in calendar days; transit is folded in here as 0 pending confirmation. [verify]",
+        "transit_days_roundtrip": null,
+        "_transit_note": "[confirm/fill] PSA's clock starts at INTAKE ('turnaround does not begin until the order is entered'), so transit is on top, same as Beckett. Previously set to 0 in error.",
         "bands": [
           {
             "n_cards_max": 1,
             "declared_value_total_max": 250,
             "inbound_label": 19.99,
-            "inbound_insurance": 2.50,
+            "inbound_insurance": 2.5,
             "insured_return": 19.99,
             "order_total": 42.48,
             "verified_on": "2026-07-09",
@@ -26,14 +25,70 @@
       "tiers": {
         "regular": {
           "fee": 79.99,
-          "turnaround_days": null,
-          "turnaround_unit": "calendar_days",
-          "verified_on": "2026-07-09",
-          "_turnaround_note": "[confirm/fill] Sources conflict (40-60 vs ~70 calendar days). Null on purpose: this REFUSES until Chris reads the live estimate off the wizard."
+          "turnaround_days": 50,
+          "turnaround_unit": "business_days",
+          "turnaround_range_business_days": [
+            40,
+            50
+          ],
+          "max_declared_value": 1500,
+          "verified_on": "2026-07-09"
+        },
+        "express": {
+          "fee": 149.0,
+          "turnaround_days": 30,
+          "turnaround_unit": "business_days",
+          "turnaround_range_business_days": [
+            20,
+            30
+          ],
+          "max_declared_value": 2500,
+          "verified_on": "2026-07-09"
+        },
+        "super_express": {
+          "fee": 349.0,
+          "turnaround_days": 10,
+          "turnaround_unit": "business_days",
+          "max_declared_value": 5000,
+          "verified_on": "2026-07-09"
+        },
+        "walk_through": {
+          "fee": 599.0,
+          "turnaround_days": 7,
+          "turnaround_unit": "business_days",
+          "max_declared_value": 10000,
+          "verified_on": "2026-07-09"
+        },
+        "premium_1": {
+          "fee": 999.0,
+          "turnaround_days": 7,
+          "turnaround_unit": "business_days",
+          "max_declared_value": 25000,
+          "verified_on": "2026-07-09"
+        },
+        "premium_2": {
+          "fee": 1999.0,
+          "turnaround_days": 7,
+          "turnaround_unit": "business_days",
+          "max_declared_value": 50000,
+          "verified_on": "2026-07-09"
+        },
+        "premium_3": {
+          "fee": 2999.0,
+          "turnaround_days": 7,
+          "turnaround_unit": "business_days",
+          "max_declared_value": 100000,
+          "verified_on": "2026-07-09"
+        },
+        "premium_5": {
+          "fee": 4999.0,
+          "turnaround_days": 7,
+          "turnaround_unit": "business_days",
+          "max_declared_value": 250000,
+          "verified_on": "2026-07-09"
         }
       }
     },
-
     "bgs": {
       "shipping": {
         "model": "per_order",
@@ -46,9 +101,9 @@
             "declared_value_total_max": 250,
             "inbound_label": null,
             "inbound_insurance": null,
-            "insurance": 4.50,
-            "insured_return": 28.00,
-            "order_total_excl_outbound": 32.50,
+            "insurance": 4.5,
+            "insured_return": 28.0,
+            "order_total_excl_outbound": 32.5,
             "verified_on": "2026-07-09",
             "source": "Beckett wizard, Order Summary, 1 card. Identical at Base and Standard, so band keys on declared value, not tier.",
             "_outbound_note": "[confirm/fill] You ship to Dallas yourself. Until outbound is entered, BGS totals are NOT round trips."
@@ -74,26 +129,31 @@
       }
     }
   },
-
   "graded_price_guard": {
     "enforce_service_match": true,
     "_note": "BGS grades harder: a BGS 9.5 often reflects what PSA calls a 10, and for Pokemon a 9.5 can trade below raw. Feeding PSA comps to a BGS submission hands BGS a win it never earned. graded_prices_service on the card must equal grading.service."
   },
-
   "marketplaces": {
     "ebay": {
-      "pct": null,
-      "flat": null,
-      "verified_on": null,
-      "_note": "[confirm/fill] Not captured. Blocks every verdict, by design."
+      "pct": 0.1325,
+      "flat": 0.4,
+      "verified_on": "2026-07-09",
+      "_category": "Toys & Hobbies > Collectible Card Games (also Non-Sport Trading Cards, Sports Trading Cards)",
+      "_note": "13.25% up to $7,500 per item; 2.35% above. Per-order fee $0.40 over $10, $0.30 at or under $10.",
+      "_base_warning": "eBay's FVF base = item price + buyer-paid shipping + SALES TAX. Offering free shipping keeps shipping out of the base; the tax portion is unavoidable and adds roughly 0.8pp of effective drag on a ~6% tax. Model conservatively or raise pct.",
+      "_insertion_fee": "First 250 listings/month free, then $0.35."
+    },
+    "rnv_shop": {
+      "pct": 0.029,
+      "flat": 0.3,
+      "verified_on": "2026-07-09",
+      "_note": "Stripe standard US domestic card; Payment Links use standard rates. Disputes cost $15 each, win or lose, and are NOT modeled here. You are seller of record: DC sales tax is yours to collect and remit, unlike eBay's marketplace-facilitator handling."
     }
   },
-
   "thresholds": {
     "rel_uplift": 0.15,
     "abs_floor": 25
   },
-
   "staleness_days": 30,
   "relist_buffer_days": 7,
   "discount_rate": 0
