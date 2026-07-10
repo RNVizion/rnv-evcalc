@@ -1,0 +1,63 @@
+{
+  "_contract": "flag.json — the ONLY interface between intake.py (writer) and the OBS overlay (reader).",
+  "_version": "0.1",
+  "_rules": [
+    "intake.py writes this file; the overlay polls it. Neither imports the other.",
+    "This is the shape a V2 mid-stream overlay pop would consume. Build once, both consume it (page spec sec 10).",
+    "NEVER a dollar value. NEVER a predicted grade. NEVER a score. The stream VOD becomes the shop provenance link; anything here travels to the buyer.",
+    "Every price-like fact is COST (from fees.json, verified+dated), never VALUE (needs comps, human, off-stream)."
+  ],
+
+  "_states": {
+    "idle": "nothing on deck",
+    "scanning": "sensor is mid-pass; overlay reveals the raster as it arrives",
+    "look": "flag fired — this card is worth a closer look",
+    "pass": "matched neither watchlist nor structural rule; logged, not discarded",
+    "unresolved": "identity known, rarity NOT resolvable from this capture — the honest refusal"
+  },
+
+  "state": "look",
+  "written_at": "2026-07-09T18:30:00Z",
+
+  "card": {
+    "name": "Meowth ex",
+    "game": "pokemon",
+    "set": "Perfect Order",
+    "number": "107",
+    "rarity": "ultra rare",
+    "image_path": "/mnt/scan/current.png",
+    "_image_note": "written progressively during scanning if the driver supports strip output; else written once on completion"
+  },
+
+  "flag": {
+    "verdict": "LOOK",
+    "reasons": [
+      { "source": "set_rule",  "text": "SECRET RARE  \u00b7  #107 of 88" },
+      { "source": "watchlist", "text": "Meowth ex \u2014 Perfect Order chase" }
+    ],
+    "_reason_note": "Render reasons verbatim. They are the interest signal. Do not summarize into a number."
+  },
+
+  "centering": {
+    "measured": false,
+    "left_right": null,
+    "top_bottom": null,
+    "_note": "null until a flatbed pass exists. Phone/webcam capture flags but does not measure (SPEC_card_intake sec 9). When present, render as the payoff line: 'CENTERING  L-R 52/48'."
+  },
+
+  "grading_cost": {
+    "_note": "COST only, straight from fees.json. Never implies the card is WORTH grading — that verdict needs comps and is off-stream.",
+    "service": "psa",
+    "tier": "regular",
+    "all_in_usd": 122.47,
+    "all_in_verified_on": "2026-07-09",
+    "capital_lock_days": 85,
+    "capital_lock_is_floor": true,
+    "text": "Grading (PSA Regular): $122.47 all-in \u00b7 card gone ~85 days"
+  },
+
+  "_forbidden_fields": [
+    "value_usd", "estimated_value", "predicted_grade", "interest_score",
+    "worth", "roi", "profit"
+  ]
+}
