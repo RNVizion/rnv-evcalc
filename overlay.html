@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RNV Rip Overlay</title>
+<style>
+  /* Deliberately minimal. Chris layers his own "squish" on top of this skeleton.
+     Only structure and state visibility live here. Web dark ramp, gold accent
+     per the brand rules — but this is a stub, not the finished look. */
+  :root {
+    --bg0: #0a0a0f; --bg1: #11111a; --gold: #d2bc93; --ink: #e8e8ea;
+  }
+  html, body {
+    margin: 0; width: 1920px; height: 1080px; overflow: hidden;
+    background: transparent; color: var(--ink);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  #stage { position: absolute; inset: 0; display: none; }
+  #stage.visible { display: block; }
+
+  /* card image reveals top-to-bottom as scan strips arrive */
+  #card-wrap {
+    position: absolute; left: 96px; top: 96px; width: 480px; height: 672px;
+    background: var(--bg1); border: 1px solid rgba(210,188,147,0.25);
+    overflow: hidden;
+  }
+  #card-img { width: 100%; display: block; }
+
+  #panel { position: absolute; left: 640px; top: 96px; width: 900px; }
+  #kicker {
+    font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  #name { font-family: "Bricolage Grotesque", sans-serif; font-size: 64px; margin: 0 0 8px; }
+  #ident { font-size: 24px; color: rgba(232,232,234,0.7); margin-bottom: 32px; }
+
+  .reason {
+    font-size: 30px; padding: 12px 0; border-top: 1px solid rgba(210,188,147,0.15);
+  }
+  .reason:last-child { border-bottom: 1px solid rgba(210,188,147,0.15); }
+
+  #centering { font-size: 40px; color: var(--gold); margin-top: 32px; min-height: 48px; }
+  #cost { font-size: 22px; color: rgba(232,232,234,0.6); margin-top: 24px; }
+
+  /* state tints — the only per-state visual cue in the stub */
+  #stage[data-state="unresolved"] #kicker { color: #e0b050; }
+  #stage[data-state="pass"]        #panel { opacity: 0.5; }
+  #stage[data-state="scanning"]    #panel { opacity: 0.35; }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <div id="card-wrap"><img id="card-img" alt=""></div>
+    <div id="panel">
+      <div id="kicker">—</div>
+      <h1 id="name">—</h1>
+      <div id="ident">—</div>
+      <div id="reasons"></div>
+      <div id="centering"></div>
+      <div id="cost"></div>
+    </div>
+  </div>
+
+<script>
+// Poll the contract file. intake.py writes it; we only read.
+// NEVER render value/grade/score — the contract forbids those fields and the
+// VOD becomes the shop's provenance link.
+const KICKERS = {
+  scanning: "Scanning\u2026",
+  look: "Look at this one",
+  pass: "Pass",
+  unresolved: "Unresolved",
+  idle: ""
+};
+
+let lastWritten = null;
+
+async function tick() {
+  try {
+    // cache-bust so OBS's browser cache doesn't pin an old payload
+    const res = await fetch("flag.json?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return;
+    const data = await res.json();
+
+    if (data.written_at === lastWritten) return;   // no change
+    lastWritten = data.written_at;
+    render(data);
+  } catch (e) {
+    // file mid-write or absent — hold the last frame, never crash the source
+  }
+}
+
+function render(data) {
+  const stage = document.getElementById("stage");
+  const state = data.state || "idle";
+
+  if (state === "idle") { stage.classList.remove("visible"); return; }
+  stage.classList.add("visible");
+  stage.dataset.state = state;
+
+  document.getElementById("kicker").textContent = KICKERS[state] || "";
+
+  const card = data.card || {};
+  document.getElementById("name").textContent = card.name || "";
+  document.getElementById("ident").textContent =
+    [card.set, card.number ? "#" + card.number : "", card.rarity]
+      .filter(Boolean).join("  \u00b7  ");
+
+  // card image (progressive reveal handled by intake writing the strip file)
+  const img = document.getElementById("card-img");
+  if (card.image_path) img.src = card.image_path + "?t=" + Date.now();
+
+  // reasons — verbatim, never summarized
+  const box = document.getElementById("reasons");
+  box.innerHTML = "";
+  if (state === "unresolved") {
+    const d = document.createElement("div");
+    d.className = "reason";
+    d.textContent = "Rarity not resolvable from this angle \u2014 needs a lamp";
+    box.appendChild(d);
+  } else {
+    (data.flag?.reasons || []).forEach(r => {
+      const d = document.createElement("div");
+      d.className = "reason";
+      d.textContent = r.text;
+      box.appendChild(d);
+    });
+  }
+
+  // centering — the scanner payoff line; blank until measured
+  const c = data.centering || {};
+  document.getElementById("centering").textContent =
+    c.measured ? `CENTERING   L-R ${c.left_right[0]}/${c.left_right[1]}   \u00b7   T-B ${c.top_bottom[0]}/${c.top_bottom[1]}`
+               : "";
+
+  // cost — COST, never value; only on LOOK
+  const g = data.grading_cost || {};
+  document.getElementById("cost").textContent =
+    (state === "look" && g.text) ? g.text : "";
+}
+
+setInterval(tick, 250);
+tick();
+</script>
+</body>
+</html>
