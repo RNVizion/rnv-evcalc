@@ -43,7 +43,7 @@ def load_image(path):
 
 
 def find_card(img):
-    """Locate the card. Returns (ordered_quad, aspect, quad_is_true).
+    """Locate the card. Returns (true_quad, rect_quad, aspect, quad_is_true).
 
     quad_is_true=False means we fell back to a bounding box, which cannot reveal
     keystone distortion. Centering must not be measured from such a quad.
@@ -67,7 +67,10 @@ def find_card(img):
     if frac > 0.95:
         raise CaptureRefused("card fills the frame; back off so all four edges are visible")
 
-    # The TRUE quad: four corners as they actually sit, keystone and all.
+    # The TRUE quad, tight to the cut edge. A convex hull resolves corners on
+    # foil-blooming cards but sits 1-2px outside the edge, which measured as a
+    # 1-2 point centering bias against synthetic ground truth. Rejected: the
+    # tool refuses on those photos anyway, so the hull bought nothing.
     peri = cv2.arcLength(c, True)
     approx = cv2.approxPolyDP(c, 0.02 * peri, True)
     if len(approx) == 4:
@@ -77,11 +80,17 @@ def find_card(img):
         quad = order_quad((cv2.boxPoints(cv2.minAreaRect(c)) / scale).astype(np.float32))
         true_quad = False
 
-    tl, tr, br, bl = quad
-    top, bottom = np.linalg.norm(tr - tl), np.linalg.norm(br - bl)
-    left, right = np.linalg.norm(bl - tl), np.linalg.norm(br - tr)
-    aspect = ((left + right) / 2.0) / ((top + bottom) / 2.0)
-    return quad, aspect, true_quad
+    # Two quads, two jobs.
+    #  - quad (approxPolyDP): the TRUE corners, keystone and all. Only this can
+    #    reveal tilt -- but its corners land 1-2px off on an anti-aliased edge.
+    #  - rect_quad (minAreaRect): exact to the cut edge, but a rectangle by
+    #    construction, so it hides keystone. Safe to rectify with, because
+    #    qc_quad refuses anything skewed beyond 2% before rectify ever runs.
+    rect = cv2.minAreaRect(c)
+    (_, _), (rw, rh), _ = rect
+    aspect = max(rw, rh) / max(min(rw, rh), 1e-6)
+    rect_quad = order_quad((cv2.boxPoints(rect) / scale).astype(np.float32))
+    return quad, rect_quad, aspect, true_quad
 
 
 def qc_quad(quad):
@@ -202,6 +211,8 @@ def flag_card(chases, name, set_code, rarity, number=None, card_set=None, extra_
     """
     reasons = []
     blob = " ".join(filter(None, [name or "", rarity or "", extra_text or ""])).lower()
+    _r = (rarity or "").strip().lower()
+    rarity_unknown = (not _r) or ("unknown" in _r) or ("?" in _r)
     def norm(x):
         return re.sub(r"[^a-z0-9]", "", (x or "").lower())
 
@@ -236,6 +247,12 @@ def flag_card(chases, name, set_code, rarity, number=None, card_set=None, extra_
                 reasons.append({"source": "watchlist", "match": "name+rarity", "row": row["name"],
                                 "grade_watch": row.get("grade_watch"),
                                 "verified_on": row["market_snapshot"].get("verified_on")})
+            elif rarity_unknown:
+                # Missing information is not negative evidence. Never PASS on a blank.
+                reasons.append({"source": "unresolved",
+                                "match": f"name matches chase row (needs {'/'.join(rar)}) "
+                                         f"but RARITY IS UNKNOWN — determine it before deciding",
+                                "row": row["name"]})
 
     # Source 2: the set rule. Catches every secret rare, named or not.
     # An asterisk in a Riftbound number marks an artist-signed overnumber.
@@ -332,7 +349,7 @@ def main():
     img = load_image(args.photo)
 
     try:
-        quad, aspect, true_quad = find_card(img)
+        quad, rect_quad, aspect, true_quad = find_card(img)
         if not true_quad:
             raise CaptureRefused(
                 "could not resolve four clean corners; keystone cannot be ruled out. "
@@ -350,7 +367,7 @@ def main():
 
     cent = None
     try:
-        card = rectify(img, quad)
+        card = rectify(img, rect_quad)
         cent = centering(find_printed_frame(card))
         print(f"centering    L-R {cent['left_right'][0]}/{cent['left_right'][1]}   "
               f"T-B {cent['top_bottom'][0]}/{cent['top_bottom'][1]}")
@@ -373,6 +390,8 @@ def main():
                 print(f"      {r['grade_watch']}")
         elif r["source"] == "set_rule":
             print(f"  - set rule:   {r['match']}")
+        elif r["source"] == "unresolved":
+            print(f"  - UNRESOLVED: {r['match']}")
         else:
             print(f"  - structural: {r['match']}")
 
