@@ -1816,6 +1816,25 @@
         "verified_on": null
       },
       "grade_watch": "PSA grades Kayou. ANY serial number is a chase; the tier ladder is verified, the ORDER within it is not."
+    },
+    {
+      "game": "naruto",
+      "set": "chapter-jin",
+      "name": "Tsunade",
+      "card_numbers": [],
+      "set_codes": [
+        "NRSA03-\u25c7UR-005L3"
+      ],
+      "rarity_any_of": [
+        "diamond ur",
+        "\u25c7ur"
+      ],
+      "why": "Pulled 2026-07-09. Code reads NRSA03-diamondUR-005L3: Diamond UR (landscape graffiti tier), NOT plain UR. Absent from the supplied top-20 list; caught by the rarity code alone.",
+      "market_snapshot": {
+        "value_usd": null,
+        "verified_on": null
+      },
+      "grade_watch": "Landscape card: the aspect check must be orientation-agnostic (fixed 2026-07-09)."
     }
   ],
   "set_rules": [
@@ -1891,12 +1910,58 @@
         "mr",
         "ur",
         "se",
-        "ssr"
+        "ssr",
+        "pr"
       ],
       "why": "185 cards / 13 rarities. FIVE serialized chase tiers: diamondASP /9, ASP /99, SE /220, AR /777, BP /999. Any serial number = chase. New types this set: ASP, diamondASP, diamondUR.",
       "verified_on": "2026-07-09",
       "sources": "Crossing TCG + 9 Tails (185 cards/13 rarities, 5 serialized tiers, exact denominators); Kayou official reveal via Andy Collectz",
-      "_conflict": "[verify] GameStop/Best Buy list 177 cards / 12 rarities for the 003A sleeved booster; retailers list 185/13 for the display box. Likely different SKUs. Does not affect the serial rule."
+      "_conflict": "[verify] GameStop/Best Buy list 177 cards / 12 rarities for the 003A sleeved booster; retailers list 185/13 for the display box. Likely different SKUs. Does not affect the serial rule.",
+      "_pr_note": "PR = US-exclusive promo (Naruto PR-009 / Sasuke PR-010), one per display box."
+    },
+    {
+      "game": "ygo",
+      "set": "chaos-origins",
+      "aliases": [
+        "chaos origins",
+        "cori",
+        "chaos-origins"
+      ],
+      "base_set_size": 100,
+      "secret_from": 9999,
+      "rarity_counts": {
+        "secret": 10,
+        "ultra": 14,
+        "super": 26,
+        "common": 50,
+        "extended_art_ultra_and_starlight": 5,
+        "additional_starlight": 20
+      },
+      "chase_rarity_codes": [
+        "secret",
+        "starlight",
+        "ultra"
+      ],
+      "starlight_look": "starlight_2_0",
+      "why": "100-card set, no overnumbering. Chase = rarity (Secret / Starlight 2.0 / extended-art Ultra). Starlight now carries a RAINBOW outer border, not grey.",
+      "verified_on": "2026-07-09",
+      "source": "Konami CORI announcement 2026-07-02"
     }
-  ]
+  ],
+  "_starlight_identification": {
+    "_note": "The whole-card-prism heuristic is VERSIONED. Konami split Starlight into two looks at Chaos Origins (CORI), July 2026.",
+    "pre_cori": {
+      "applies_to": "sets before Chaos Origins (JUSH/Justice Hunters, etc.)",
+      "tell": "grey outer card border; prism foil across the card body/art",
+      "verified_on": "2026-07-09"
+    },
+    "starlight_2_0": {
+      "applies_to": "Chaos Origins (CORI) and newer",
+      "tell": "RAINBOW FOIL outer border replaces the grey border; richer foil; extended/frame-breaking art on the 5 EA chases",
+      "not_reprinted_backward": "prior Starlights will NOT be reprinted with 2.0 tech; the boundary is permanent and set-dated",
+      "verified_on": "2026-07-09",
+      "source": "Konami official CORI announcement, 2026-07-02, yugioh-card.com/eu/product/chaos-origins/"
+    },
+    "operational_rule": "Read the OUTER BORDER, then confirm against the card's set. Grey border + prism = pre-CORI Starlight. Rainbow border = Starlight 2.0. A card's set decides which tell applies; never apply the 2.0 border test to a pre-CORI card or vice versa."
+  }
 }
