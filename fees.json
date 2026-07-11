@@ -127,6 +127,38 @@
           "_note": "With subgrades. 45 business days ~= 63 calendar days, plus transit."
         }
       }
+    },
+    "tag": {
+      "_status": "dormant \u2014 added 2026-07-09 as a modeled option, not an active lane.",
+      "_why_dormant": "PSA Value pause spilled into TAG: Basic/Standard/Express sold out, leaving only Priority ($149) and Walk-Through ($299). Too expensive and too scarce to be the cheap lane it looks like on paper. Revisit if lower tiers reopen.",
+      "_eligibility": "[verify] Mainly licensed cards 1989+ and up to 50pt. Yu-Gi-Oh is often the 'PSA is more practical' side; Kayou eligibility UNCONFIRMED. Check before assuming a card can even go to TAG.",
+      "_resale_caveat": "TAG slabs resell ~35-60% below PSA for Pokemon, wider on vintage (multiple sources, 2026). Model as its OWN graded-price node; a lower fee does NOT mean a higher net. Same trap as BGS.",
+      "shipping": {
+        "model": "per_order",
+        "inbound_paid_to_service": null,
+        "transit_days_roundtrip": null,
+        "_note": "[confirm/fill] Not quoted. TAG lists a fixed submission kit (~$49.95) separate from per-card fees \u2014 capture it when pulling a real quote.",
+        "bands": []
+      },
+      "tiers": {
+        "priority": {
+          "fee": 149.0,
+          "turnaround_days": null,
+          "turnaround_unit": "business_days",
+          "turnaround_range_business_days": [
+            15,
+            30
+          ],
+          "verified_on": null,
+          "_note": "[confirm/fill] Listed $149 / 15-30 business days as of late June 2026, not pulled from a live checkout. Only orderable tier right now."
+        },
+        "walk_through": {
+          "fee": 299.0,
+          "turnaround_days": null,
+          "turnaround_unit": "business_days",
+          "verified_on": null
+        }
+      }
     }
   },
   "graded_price_guard": {
