@@ -1,8 +1,8 @@
 {
-  "_contract": "flag.json — the ONLY interface between intake.py (writer) and the OBS overlay (reader).",
+  "_contract": "flag.json — the ONLY interface between scripts/intake.py (writer) and the OBS overlay (reader).",
   "_version": "0.1",
   "_rules": [
-    "intake.py writes this file; the overlay polls it. Neither imports the other.",
+    "scripts/intake.py writes this file; the overlay polls it. Neither imports the other.",
     "This is the shape a V2 mid-stream overlay pop would consume. Build once, both consume it (page spec sec 10).",
     "NEVER a dollar value. NEVER a predicted grade. NEVER a score. The stream VOD becomes the shop provenance link; anything here travels to the buyer.",
     "Every price-like fact is COST (from fees.json, verified+dated), never VALUE (needs comps, human, off-stream)."

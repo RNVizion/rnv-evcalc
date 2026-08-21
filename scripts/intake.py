@@ -6,9 +6,9 @@ Spec: SPEC_card_intake.md. Prime directive: resolve or refuse, never guess.
 This tool asserts identity (given to it, or read by a vision pass) and geometry
 (measured). It NEVER asserts a price and NEVER assigns a grade.
 
-    python3 intake.py front.jpg --name "Number 39: Utopia" --set-code YS12-EN039
-    python3 intake.py front.jpg --name "..." --rarity "secret" --game ygo
-    python3 intake.py front.jpg --qc-only
+    python3 scripts/intake.py front.jpg --name "Number 39: Utopia" --set-code YS12-EN039
+    python3 scripts/intake.py front.jpg --name "..." --rarity "secret" --game ygo
+    python3 scripts/intake.py front.jpg --qc-only
 
 Exit codes: 0 ok, 2 capture refused, 3 flag=PASS (no stub written).
 """

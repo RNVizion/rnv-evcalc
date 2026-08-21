@@ -5,10 +5,10 @@ Resolve or refuse, never guess: stale or missing inputs return a
 verification checklist, not a verdict. Spec: SPEC_grading_ev_calculator.md.
 
 Usage:
-    python3 evcalc.py cards/my-card.json
-    python3 evcalc.py --batch cards/
-    python3 evcalc.py --batch cards/ --order-cards 5 --order-declared-value 900
-    python3 evcalc.py --fees other_fees.json cards/my-card.json
+    python3 scripts/evcalc.py cards/my-card.json
+    python3 scripts/evcalc.py --batch cards/
+    python3 scripts/evcalc.py --batch cards/ --order-cards 5 --order-declared-value 900
+    python3 scripts/evcalc.py --fees other_fees.json cards/my-card.json
 """
 
 import argparse
