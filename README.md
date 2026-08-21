@@ -14,8 +14,16 @@ One rule governs both — **resolve or refuse, never guess.** Stale or missing i
 | `fees.json` | Fee, grading, and threshold config | hand-edited, dated |
 | `chases.json` | Watchlist consulted by intake | hand-edited |
 | `cards/` | Per-card files; `_example.json` is the copy-me template | input and generated |
-| `flag.json` | Runtime state; the only interface to the OBS overlay | machine-written |
+| `flag.json` | Overlay contract and worked example | hand-authored; no writer yet |
 | `overlay.html` | OBS browser source; polls `flag.json` | web surface |
+
+## Requirements
+
+`evcalc.py` and `shipping.py` are Python 3.11+ stdlib only. `intake.py` additionally needs OpenCV, NumPy, and Pillow:
+
+```bash
+pip install opencv-python numpy pillow
+```
 
 The JSON files sit at root deliberately. They share a serializer, not a role: `fees.json` and `chases.json` are hand-edited config, `cards/` is data, `flag.json` is runtime state overwritten on every scan. Grouping by file extension would put four lifecycles in one folder and tell you nothing.
 
@@ -40,7 +48,7 @@ python3 scripts/evcalc.py --fees other_fees.json cards/my-card.json
 
 Single-card runs print a report table: net raw, EV graded, net graded, the delta and ratio, the verdict, the break-even PSA-10 rate, a FRAGILE flag where the verdict is sensitive to an optimistic prior, capital-lock days, and the `as_of` date behind every price used. Batch mode sorts by delta descending — that is the collection triage.
 
-A REFUSED report names the exact fields to verify and their last `as_of` dates. It is the expected output on a fresh `fees.json`, which ships all-null by design.
+A REFUSED report names the exact fields to verify and their last `as_of` dates. `fees.json` carries dated figures and leaves unverified rows null on purpose — the null path refuses rather than estimates, so a REFUSED verdict on a dormant grading service is the tool working, not failing.
 
 Spec: `SPEC_grading_ev_calculator.md`, maintained outside this repo.
 
@@ -60,6 +68,8 @@ Spec: `SPEC_card_intake.md`, maintained outside this repo.
 
 ## The overlay contract
 
-`flag.json` is the only interface between intake and the OBS overlay: intake writes it, the overlay polls it, neither imports the other. The contract, its state machine, and its forbidden fields are documented inside the file itself.
+`flag.json` is the designed interface between intake and the OBS overlay: the overlay polls it, neither side imports the other. The contract, its state machine, and its forbidden fields are documented inside the file itself.
+
+**The writer is not built yet.** Intake prints its flag to the terminal and writes a card stub; nothing currently writes `flag.json`. The file in this repo is the contract and a worked example, not live state.
 
 Nothing in that file may carry a value, a predicted grade, or a score. Cost is permitted where it comes from `fees.json` dated; worth is not. The stream VOD becomes the shop provenance link, so anything on the overlay travels to the buyer.
