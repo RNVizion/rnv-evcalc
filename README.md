@@ -25,13 +25,13 @@ The JSON files sit at root deliberately. They share a serializer, not a role: `f
 
 Every default path resolves against the working directory, not against the script. `--fees` defaults to `fees.json`, `--chases` to `chases.json`, `--out` to `cards/`, and batch runs write `batch_report.csv` into the CWD. Invoke from anywhere else and those defaults miss.
 
-```
+```bash
 cd /path/to/rnv-evcalc
 ```
 
 ## evcalc
 
-```
+```bash
 python3 scripts/evcalc.py cards/my-card.json
 python3 scripts/evcalc.py --batch cards/
 python3 scripts/evcalc.py --batch cards/ --order-cards 5 --order-declared-value 900
@@ -42,11 +42,11 @@ Single-card runs print a report table: net raw, EV graded, net graded, the delta
 
 A REFUSED report names the exact fields to verify and their last `as_of` dates. It is the expected output on a fresh `fees.json`, which ships all-null by design.
 
-Spec: `SPEC_grading_ev_calculator.md`.
+Spec: `SPEC_grading_ev_calculator.md`, maintained outside this repo.
 
 ## intake
 
-```
+```bash
 python3 scripts/intake.py front.jpg --name "Number 39: Utopia" --set-code YS12-EN039
 python3 scripts/intake.py front.jpg --name "..." --rarity "secret" --game ygo
 python3 scripts/intake.py front.jpg --qc-only
@@ -56,7 +56,7 @@ Exit codes: `0` ok, `2` capture refused, `3` flag returned PASS and no stub was 
 
 Intake asserts identity and measures geometry. It never asserts a price and never assigns a grade — those need comps and a human, off-stream.
 
-Spec: `SPEC_card_intake.md`.
+Spec: `SPEC_card_intake.md`, maintained outside this repo.
 
 ## The overlay contract
 
