@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Written by `evcalc.py --batch` into the working directory
+batch_report.csv
+
+# OS
+.DS_Store
