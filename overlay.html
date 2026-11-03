@@ -3,12 +3,20 @@
 <head>
 <meta charset="utf-8">
 <title>RNV Rip Overlay</title>
+<!-- The brand's own faces, from fonts/, a copy of rnv-brand's engine/fonts/.
+     Relative on purpose: OBS serves this file from a local path, where a URL
+     starting with / resolves to nothing. -->
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
   /* Deliberately minimal. Chris layers his own "squish" on top of this skeleton.
      Only structure and state visibility live here. Web dark ramp, gold accent
-     per the brand rules — but this is a stub, not the finished look. */
+     per the brand rules — but this is a stub, not the finished look.
+     Every color is a register value, at any alpha: rnv-brand's check_web_colors
+     fails this file on any other. --ink is WEB["text"]; --warn is
+     STATUS["warning-text"], the status family's color for a word on a dark ground. */
   :root {
-    --bg0: #0a0a0f; --bg1: #11111a; --gold: #d2bc93; --ink: #e8e8ea;
+    --bg0: #0a0a0f; --bg1: #11111a; --gold: #d2bc93; --ink: #e8e8f0;
+    --warn: #bc8752;
   }
   html, body {
     margin: 0; width: 1920px; height: 1080px; overflow: hidden;
@@ -31,8 +39,13 @@
     font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 16px;
   }
-  #name { font-family: "Bricolage Grotesque", sans-serif; font-size: 64px; margin: 0 0 8px; }
-  #ident { font-size: 24px; color: rgba(232,232,234,0.7); margin-bottom: 32px; }
+  /* Display headings take 500. 64px sits between two tracking rungs, so it takes
+     its role's: the overlay's title, the page-title rung (BRAND_TYPE.md). */
+  #name {
+    font-family: "Bricolage Grotesque", sans-serif; font-size: 64px; font-weight: 500;
+    letter-spacing: -0.03em; margin: 0 0 8px;
+  }
+  #ident { font-size: 24px; color: rgba(232,232,240,0.7); margin-bottom: 32px; }
 
   .reason {
     font-size: 30px; padding: 12px 0; border-top: 1px solid rgba(210,188,147,0.15);
@@ -40,10 +53,10 @@
   .reason:last-child { border-bottom: 1px solid rgba(210,188,147,0.15); }
 
   #centering { font-size: 40px; color: var(--gold); margin-top: 32px; min-height: 48px; }
-  #cost { font-size: 22px; color: rgba(232,232,234,0.6); margin-top: 24px; }
+  #cost { font-size: 22px; color: rgba(232,232,240,0.6); margin-top: 24px; }
 
   /* state tints — the only per-state visual cue in the stub */
-  #stage[data-state="unresolved"] #kicker { color: #e0b050; }
+  #stage[data-state="unresolved"] #kicker { color: var(--warn); }
   #stage[data-state="pass"]        #panel { opacity: 0.5; }
   #stage[data-state="scanning"]    #panel { opacity: 0.35; }
 </style>
